@@ -1,0 +1,8 @@
+.project
+scripts/
+styles/
+index.html
+src/*.js
+src/*.html
+src/*.css
+.idea/
