@@ -13,3 +13,7 @@ class views.headNavbarView extends Backbone.View
     @collection.forEach (model) ->
       body.append navbarTemplate
         model:model
+
+    body.find(".nav-btn").on "click", (e) ->
+      body.find(".active").toggleClass "active"
+      $(e.currentTarget).toggleClass "active"

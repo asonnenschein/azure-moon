@@ -16,7 +16,7 @@ html(lang="en")
                             ul.nav
 
         script#headNavbar(type="text/html")
-            li(class!="<%= model.get('active') %>")
+            li.nav-btn(class!="<%= model.get('active') %>")
                 a(href!="#<%= model.get('id') %>") <%= model.get('display') %>
 
         script(src="http://code.jquery.com/jquery-1.9.1.min.js")
