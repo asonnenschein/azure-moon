@@ -1,0 +1,28 @@
+doctype 5
+html(lang="en")
+    head
+        title Azure Moon Wicks 'n Charms
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="styles/bootstrap.css")
+        link(rel="stylesheet", href="styles/custom.css")
+    body
+        .container
+            .heading
+                h3 Azure Moon Wicks 'n Charms
+                .navbar
+                    .navbar-inner
+                        .container
+                            ul.nav
+
+        script#headNavbar(type="text/html")
+            li(class!="<%= model.get('active') %>")
+                a(href!="#<%= model.get('id') %>") <%= model.get('display') %>
+
+        script(src="http://code.jquery.com/jquery-1.9.1.min.js")
+        script(src="vendor/bootstrap.min.js")
+        script(src="vendor/underscore-min.js")
+        script(src="vendor/backbone-min.js")
+        script(src="scripts/model-navbar.js")
+        script(src="scripts/view-navbar.js")
+        script(src="scripts/app.js")
