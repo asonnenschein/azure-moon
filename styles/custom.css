@@ -2,13 +2,23 @@
 .navbar .navbar-inner {
     padding: 0%;
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(129, 129, 129)), to(rgb(25, 0, 44)));
+    border: 1px solid rgb(25, 0, 44);
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
 }
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover {
+    background-color: rgb(57, 54, 128);
+    color:#fff;
+}
+.navbar .nav > li > a:hover {
+    color:#fff;
+    transition: .3s linear;
+}
 .navbar .nav > li > a {
-    color: #000;
+    color: rgb(129, 200, 248);
     font-size: 16px;
+    text-shadow: none;
 }
 .navbar .navbar-inner {
     padding: 0;
@@ -26,8 +36,8 @@
 .navbar .nav li a {
     font-weight: bold;
     text-align: center;
-    border-left: 1px solid rgba(255,255,255,.75);
-    border-right: 1px solid rgba(0,0,0,.1);
+    border-left: 1px solid rgba(25, 0, 44,.75);
+    border-right: 1px solid rgba(25, 0, 44,.1);
 }
 .navbar .nav li:first-child a {
     border-left: 0;
@@ -36,4 +46,7 @@
 .navbar .nav li:last-child a {
     border-right: 0;
     border-radius: 0 3px 3px 0;
+}
+body {
+    background-color: rgb(18, 0, 51);
 }
