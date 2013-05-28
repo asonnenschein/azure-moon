@@ -1,6 +1,6 @@
 .project
 scripts/
-styles/
+styles/bootstrap.css
 index.html
 src/*.js
 src/*.html
