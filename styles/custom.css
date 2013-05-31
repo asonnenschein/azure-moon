@@ -8,7 +8,7 @@
     border-radius: 0px;
 }
 .navbar .nav > .active > a, .navbar .nav > .active > a:hover {
-    background-color: rgb(57, 54, 128);
+    background-color: rgb(51, 102, 153);
     color:#fff;
 }
 .navbar .nav > li > a:hover {
@@ -48,5 +48,5 @@
     border-radius: 0 3px 3px 0;
 }
 body {
-    background-color: rgb(18, 0, 51);
+    background-color: rgb(00,00,00);
 }
