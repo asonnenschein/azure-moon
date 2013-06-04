@@ -1,4 +1,12 @@
 /* Customize the navbar links to be fill the entire space of the .navbar */
+@font-face {
+    font-family: stonecross;
+    src: url(martel/martel.ttf);
+}
+@font-face {
+    font-family: perigord;
+    src: url(perigord/pe______.ttf);
+}
 .navbar .navbar-inner {
     padding: 0%;
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(129, 129, 129)), to(rgb(25, 0, 44)));
@@ -47,6 +55,17 @@
     border-right: 0;
     border-radius: 0 3px 3px 0;
 }
+h3 {
+    font-family: stonecross;
+    font-size: 50px;
+    color: #0088cc;
+}
+.navbar {
+    font-family: perigord;
+}
 body {
-    background-color: rgb(00,00,00);
+    image:url('moon-1.png');
+    background-color:black;
+    background-size:80%;
+    background-repeat:no-repeat;
 }
