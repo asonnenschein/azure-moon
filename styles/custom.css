@@ -1,4 +1,23 @@
 /* Customize the navbar links to be fill the entire space of the .navbar */
+.container {
+    background-color: rgba(128,128,128,0.3);
+    width: 1000px;
+    overflow: hidden;
+}
+.heading {
+    width:400px;
+    float:left;
+}
+.subheading {
+    font-family: stonecross;
+    font-size:61px;
+    color: #0088cc;
+    line-height: 50%;
+}
+.headbar {
+    padding-top: 6%;
+    position:absolute;
+}
 @font-face {
     font-family: stonecross;
     src: url(martel/martel.ttf);
@@ -7,65 +26,38 @@
     font-family: perigord;
     src: url(perigord/pe______.ttf);
 }
-.navbar .navbar-inner {
-    padding: 0%;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(129, 129, 129)), to(rgb(25, 0, 44)));
-    border: 1px solid rgb(25, 0, 44);
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
+.nav {
+    line-height: 0%;
 }
-.navbar .nav > .active > a, .navbar .nav > .active > a:hover {
+.nav > .active > a, .nav > .active > a:hover {
     background-color: rgb(51, 102, 153);
     color:#fff;
 }
-.navbar .nav > li > a:hover {
+.nav > li > a:hover {
     color:#fff;
     transition: .3s linear;
 }
-.navbar .nav > li > a {
+.nav > li > a {
     color: rgb(129, 200, 248);
-    font-size: 16px;
+    font-size: 15px;
     text-shadow: none;
 }
-.navbar .navbar-inner {
-    padding: 0;
-}
-.navbar .nav {
-    margin: 0;
-    display: table;
-    width: 100%;
-}
-.navbar .nav li {
-    display: table-cell;
-    width: 1%;
-    float: none;
-}
-.navbar .nav li a {
+.nav li a {
     font-weight: bold;
     text-align: center;
-    border-left: 1px solid rgba(25, 0, 44,.75);
-    border-right: 1px solid rgba(25, 0, 44,.1);
-}
-.navbar .nav li:first-child a {
-    border-left: 0;
-    border-radius: 3px 0 0 3px;
-}
-.navbar .nav li:last-child a {
-    border-right: 0;
-    border-radius: 0 3px 3px 0;
 }
 h3 {
     font-family: stonecross;
-    font-size: 50px;
+    font-size: 80px;
     color: #0088cc;
-}
-.navbar {
-    font-family: perigord;
+    line-height: 60%;
 }
 body {
     image:url('moon-1.png');
     background-color:black;
     background-size:80%;
     background-repeat:no-repeat;
+}
+svg {
+    display: block;
 }

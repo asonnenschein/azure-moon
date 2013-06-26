@@ -9,11 +9,22 @@ html(lang="en")
     body
         .container
             .heading
-                h3 AZURE MOON WICKS 'N CHARMS
-                .navbar
-                    .navbar-inner
-                        .container
-                            ul.nav
+                img(src="styles/witch-logo-24.png")
+            span.headbar
+                svg(id="line", xmlns="http://www.w3.org/2000/svg", version="1.1", viewBox="0 50 500 10",
+                    style="stroke:rgb(51,102,153);stroke-width:4;height:20px;width:500px")
+                    line(x1="0", y1="50", x2="490", y2="50")
+                h3 AZURE MOON
+                .subheading
+                    p Wicks and Charms
+                svg(id="line", xmlns="http://www.w3.org/2000/svg", version="1.1", viewBox="0 50 500 10",
+                    style="stroke:rgb(51,102,153);stroke-width:4;height:20px;width:500px")
+                    line(x1="0", y1="50", x2="490", y2="50")
+                    line(x1="0", y1="50", x2="490", y2="50")
+                ul.nav.nav-pills
+            svg(id="line", xmlns="http://www.w3.org/2000/svg", version="1.1", viewBox="0 50 1000 10",
+                style="stroke:rgb(51,102,153);stroke-width:4;height:20px;width:1000px")
+                line(x1="0", y1="50", x2="1000", y2="50")
 
         script#headNavbar(type="text/html")
             li.nav-btn(class!="<%= model.get('active') %>")
