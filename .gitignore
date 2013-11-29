@@ -1,8 +1,2 @@
 .project
-scripts/
-styles/bootstrap.css
-index.html
-src/*.js
-src/*.html
-src/*.css
 .idea/

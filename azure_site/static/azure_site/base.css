@@ -1,0 +1,53 @@
+@font-face {
+    font-family: stonecross;
+    src: url(vendor/stonecross/st______.ttf);
+}
+
+@font-face {
+    font-family: perigord;
+    src: url(vendor/perigord/pe______.ttf);
+}
+
+html {
+    min-height:100%;
+    position:relative;
+}
+
+.heading {
+    width:400px;
+    float:left;
+}
+
+.head-bar {
+    padding-top: 1%;
+    position:absolute;
+}
+
+.subheading {
+    font-family: stonecross;
+    font-size: 45px;
+    color: #0088cc;
+}
+
+h3 {
+    font-family: stonecross;
+    font-size: 68px;
+    color: #0088cc;
+    line-height: 60%;
+}
+
+.container {
+    background-color: rgba(128, 128, 128, 0.3);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 100px;
+    overflow: hidden;
+}
+
+body {
+    background-color: rgba(25, 0, 51, 1);
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
