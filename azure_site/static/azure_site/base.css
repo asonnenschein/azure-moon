@@ -13,11 +13,6 @@ html {
     position:relative;
 }
 
-.heading {
-    width:400px;
-    float:left;
-}
-
 .head-bar {
     padding-top: 1%;
     position:absolute;
@@ -36,18 +31,11 @@ h3 {
     line-height: 60%;
 }
 
-.container {
-    background-color: rgba(128, 128, 128, 0.3);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 100px;
-    overflow: hidden;
+.main-nav {
+    max-width: 550px;
 }
 
 body {
-    background-color: rgba(25, 0, 51, 1);
-    background-size: 80%;
+    background-color: rgba(24, 15, 37, 1);
     background-repeat: no-repeat;
 }
