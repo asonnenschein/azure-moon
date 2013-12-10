@@ -18,8 +18,8 @@ html {
 }
 
 .heading img {
-    width: 75%;
-    height: 75%;
+    width: 60%;
+    height: 60%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -34,17 +34,21 @@ html {
     font-family: stonecross;
     font-size: 45px;
     color: #0088cc;
+    text-shadow: 2px 2px #0200ff;
 }
 
 h3 {
     font-family: stonecross;
     font-size: 68px;
     color: #0088cc;
+    text-shadow: 2px 2px #0200ff;
     line-height: 60%;
 }
 
 .main-nav {
     max-width: 550px;
+    font-family: perigord;
+    font-size: 20px;
 }
 
 body {
