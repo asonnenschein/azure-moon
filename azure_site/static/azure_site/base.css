@@ -13,45 +13,34 @@ html {
     position:relative;
 }
 
-.heading {
+body {
+    background-color: rgba(24, 15, 37, 1);
+    background-repeat: no-repeat;
+}
+
+.azure-header .azure-logo, .azure-title{
     float: left;
 }
 
-.heading img {
-    width: 60%;
-    height: 60%;
+.azure-logo img {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-.head-bar {
-    padding-top: 3%;
-    position:absolute;
+.azure-title {
+    height: 267px;
+    text-align: center;
+    line-height: 267px;
 }
 
-.subheading {
+.azure-title .main-title {
     font-family: stonecross;
-    font-size: 45px;
+    font-size: 55px;
     color: #0088cc;
     text-shadow: 2px 2px #0200ff;
 }
 
-h3 {
-    font-family: stonecross;
-    font-size: 68px;
-    color: #0088cc;
-    text-shadow: 2px 2px #0200ff;
-    line-height: 60%;
-}
-
-.main-nav {
-    max-width: 550px;
-    font-family: perigord;
-    font-size: 20px;
-}
-
-body {
-    background-color: rgba(24, 15, 37, 1);
-    background-repeat: no-repeat;
+.azure-title .main-title span {
+    font-size: 36px;
 }
