@@ -107,3 +107,7 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
+
+MEDIA_ROOT = '/Users/adrian/Documents/venv/azure_moon/azuremoon/azure_site/media'
+
+MEDIA_URL = '/media/'
