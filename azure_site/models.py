@@ -25,6 +25,7 @@ class Product(models.Model):
     image_1 = models.ImageField(upload_to=file, height_field=None, width_field=None, max_length=100, default='undefined')
     image_2 = models.ImageField(upload_to=file, height_field=None, width_field=None, max_length=100, default='undefined')
     image_3 = models.ImageField(upload_to=file, height_field=None, width_field=None, max_length=100, default='undefined')
+    image_thumb = models.ImageField(upload_to=file, height_field=None, width_field=None, max_length=100, default='undefined')
     quantity = models.IntegerField(default=0)
     pub_date = models.DateTimeField('date published')
 
