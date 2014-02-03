@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Azure Moon Wicks 'n Charms{% endblock %}</title>
-        <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap-3.0.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap-3.1.0/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}azure_site/base.css">
     </head>
     <body>
-        <header class="navbar navbar-fixed-top azure-navbar" role="banner">
-            <div class="container">
+        <header class="navbar navbar-fixed-top azure-navbar col-md-12" role="banner">
+            <div class="container-fluid">
                 <div class="navbar-header azure-header">
                     <div class="azure-logo">
-                        <img src="{{ STATIC_URL }}azure_site/vendor/images/witch_logo.png">
+                        <img src="{{ STATIC_URL }}azure_site/vendor/images/nude_witch_on_broom.svg" class="img-responsive" alt="Responsive image">
                     </div>
                     <div class="azure-title">
                         <div class="main-title">AZURE MOON<br><span>WICKS AND CHARMS</span></div>
