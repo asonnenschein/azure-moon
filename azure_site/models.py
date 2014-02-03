@@ -10,8 +10,16 @@ from django.utils import timezone
 
 file = '/Users/adrian/Documents/venv/azure_moon/azuremoon/azure_site/media'
 
+def build_uid(type='product'):
+    if type is 'customer':
+        return unicode('ac' + b2a_hex(urandom(5)))
+    elif type is 'billing':
+        return unicode('ab' + b2a_hex(urandom(5)))
+    else:
+        return unicode('ap' + b2a_hex(urandom(5)))
+
 class Product(models.Model):
-    product_id = models.CharField(max_length=16, editable=False, default='undefined')
+    product_id = models.CharField(max_length=20, editable=True, default=build_uid)
     name = models.CharField(max_length=200, default='undefined')
     collection = models.CharField(max_length=200, default='undefined')
     description_head = models.CharField(max_length=200, default='undefined')
@@ -30,8 +38,7 @@ class Product(models.Model):
     pub_date = models.DateTimeField('date published')
 
     def __unicode__(self):
-        return unicode('azure0' + b2a_hex(urandom(10)))
-#        self.pub_date = timezone.now()
+        return self.collection + ' --- ' + self.name
 
 class Customer(models.Model):
     customer_id = models.CharField(max_length=16, editable=False)
