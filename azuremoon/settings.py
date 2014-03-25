@@ -48,7 +48,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'azure_site'
+    'azure_site',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -40,6 +40,14 @@ class Product(models.Model):
     def __unicode__(self):
         return self.collection + ' --- ' + self.name
 
+    def serialized(self):
+        json = {
+            'product_id': self.product_id,
+            'name': self.name,
+            'collection': self.collection,
+        }
+        return json
+
 class Customer(models.Model):
     customer_id = models.CharField(max_length=16, editable=False)
     first_name = models.CharField(max_length=200)
