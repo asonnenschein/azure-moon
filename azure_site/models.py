@@ -45,6 +45,23 @@ class Product(models.Model):
             'product_id': self.product_id,
             'name': self.name,
             'collection': self.collection,
+            'description': {
+                'head': self.description_head,
+                'body': self.description_body,
+                'extras': self.description_extras,
+                'comes_with': self.description_comes_with
+            },
+            'overview': self.overview,
+            'material': self.material,
+            'handmade': self.handmade,
+            'price': str(self.price),
+            'images': {
+                '1': str(self.image_1),
+                '2': str(self.image_2),
+                '3': str(self.image_3)
+            },
+            'quantity': self.quantity,
+            'pub_date': str(self.pub_date)
         }
         return json
 
