@@ -8,7 +8,8 @@ from django.utils import timezone
 #def content_file_name(instance, filename):
 #    return '/'.join(['content', instance.user.username, filename])
 
-media_path = '/Users/adrian/Documents/venv/azure_moon/azuremoon/azure_site/media'
+project_root = '/Users/adrian/Documents/venv/azure_moon/azuremoon/'
+media_path = project_root + 'azure_site/media'
 
 def build_uid(this_class):
     if this_class is 'customer':
@@ -23,10 +24,10 @@ class Product(models.Model):
     Defines what constitutes a product, make sure to include a quantity*price 
     height_fieldin the UI.
     '''
-    product_id = models.CharField(max_length=20, editable=True, 
+    product_id = models.CharField(max_length=20, editable=False, 
         default=build_uid('product'))
-    heading = models.CharField(max_length=200, default='undefined')
-    subheading = models.CharField(max_length=200, default='undefined')
+    heading = models.CharField(max_length=200)
+    subheading = models.CharField(max_length=200)
     description = models.TextField()
     image_1 = models.ImageField(upload_to=media_path, height_field=None, 
         width_field=None, max_length=500)
@@ -34,18 +35,23 @@ class Product(models.Model):
         width_field=None, max_length=500)
     image_3 = models.ImageField(upload_to=media_path, height_field=None, 
         width_field=None, max_length=500)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
-    quantity = models.IntegerField(default=0)
-    collection = models.CharField(max_length=200, default='undefined')
-    category = models.CharField(max_length=200, default='undefined')
+    price = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34')
+    quantity = models.IntegerField(
+        help_text='Total number of units available for sale')
+    collection = models.CharField(max_length=200, 
+        help_text='Group that this product belongs to (ex: Summer Scents)')
+    category = models.CharField(max_length=200, 
+        help_text='Type of product (ex: Necklaces)')
     pub_date = models.DateTimeField('date published')
+    on_sale = models.BooleanField(default=False)
 
     # Display name in manager application
     def __unicode__(self):
-        return self.collection + ' --- ' + self.name
+        return self.collection + ' --- ' + self.heading
 
     # Return JSON object of all products in the database
-    def all_products_serialized(self):
+    def products_serialized(self):
         json = {
             'product_id': self.product_id,
             'heading': self.name,

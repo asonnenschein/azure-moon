@@ -9,13 +9,13 @@ import json
 def homepage(request):
     return render(request, "azure_site/home.html", {})
 
-def get_json(products):
-    data = [p.serialized() for p in products]
+def get_products_serialized(products):
+    data = [p.products_serialized() for p in products]
     return HttpResponse(json.dumps(data), mimetype='application/json')
 
-def view_products(products):
-    return get_json(products)
+def view_all_products(products):
+    return get_products_serialized(products)
 
 def get_all_products(extension='json'):
     models = Product.objects.all()
-    return view_products(models)
+    return view_all_products(models)
