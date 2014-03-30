@@ -8,60 +8,59 @@ from django.utils import timezone
 #def content_file_name(instance, filename):
 #    return '/'.join(['content', instance.user.username, filename])
 
-file = '/Users/adrian/Documents/venv/azure_moon/azuremoon/azure_site/media'
+media_path = '/Users/adrian/Documents/venv/azure_moon/azuremoon/azure_site/media'
 
-def build_uid(type='product'):
-    if type is 'customer':
+def build_uid(this_class):
+    if this_class is 'customer':
         return unicode('ac' + b2a_hex(urandom(5)))
-    elif type is 'billing':
+    elif this_class is 'billing':
         return unicode('ab' + b2a_hex(urandom(5)))
-    else:
+    elif this_class is 'product':
         return unicode('ap' + b2a_hex(urandom(5)))
 
 class Product(models.Model):
-    product_id = models.CharField(max_length=20, editable=True, default=build_uid)
-    name = models.CharField(max_length=200, default='undefined')
-    collection = models.CharField(max_length=200, default='undefined')
-    description_head = models.CharField(max_length=200, default='undefined')
-    description_body = models.CharField(max_length=10000, default='undefined')
-    description_extras = models.CharField(max_length=200, default='undefined')
-    description_comes_with = models.CharField(max_length=200, default='undefined')
-    overview = models.CharField(max_length=1000, default='undefined')
-    material = models.CharField(max_length=200, default='undefined')
-    handmade = models.BooleanField(default=True)
-    price = models.DecimalField(max_digits=5, decimal_places=2, default='undefined')
-    image_1 = models.ImageField(upload_to=file, height_field=None, width_field=None, max_length=500, default='undefined')
-    image_2 = models.ImageField(upload_to=file, height_field=None, width_field=None, max_length=500, default='undefined')
-    image_3 = models.ImageField(upload_to=file, height_field=None, width_field=None, max_length=500, default='undefined')
-    image_thumb = models.ImageField(upload_to=file, height_field=None, width_field=None, max_length=500, default='undefined')
+    '''
+    Defines what constitutes a product, make sure to include a quantity*price 
+    height_fieldin the UI.
+    '''
+    product_id = models.CharField(max_length=20, editable=True, 
+        default=build_uid('product'))
+    heading = models.CharField(max_length=200, default='undefined')
+    subheading = models.CharField(max_length=200, default='undefined')
+    description = models.TextField()
+    image_1 = models.ImageField(upload_to=media_path, height_field=None, 
+        width_field=None, max_length=500)
+    image_2 = models.ImageField(upload_to=media_path, height_field=None, 
+        width_field=None, max_length=500)
+    image_3 = models.ImageField(upload_to=media_path, height_field=None, 
+        width_field=None, max_length=500)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     quantity = models.IntegerField(default=0)
+    collection = models.CharField(max_length=200, default='undefined')
+    category = models.CharField(max_length=200, default='undefined')
     pub_date = models.DateTimeField('date published')
 
+    # Display name in manager application
     def __unicode__(self):
         return self.collection + ' --- ' + self.name
 
-    def serialized(self):
+    # Return JSON object of all products in the database
+    def all_products_serialized(self):
         json = {
             'product_id': self.product_id,
-            'name': self.name,
-            'collection': self.collection,
-            'description': {
-                'head': self.description_head,
-                'body': self.description_body,
-                'extras': self.description_extras,
-                'comes_with': self.description_comes_with
-            },
-            'overview': self.overview,
-            'material': self.material,
-            'handmade': self.handmade,
-            'price': str(self.price),
+            'heading': self.name,
+            'subheading': self.subheading,
+            'description': self.description,
             'images': {
-                '1': str(self.image_1),
-                '2': str(self.image_2),
-                '3': str(self.image_3)
+                'image_1': self.image_1,
+                'image_2': self.image_2,
+                'image_3': self.image_3
             },
+            'price': self.price,
             'quantity': self.quantity,
-            'pub_date': str(self.pub_date)
+            'collection': self.collection,
+            'category': self.category,
+            'pub_date': self.pub_date
         }
         return json
 
