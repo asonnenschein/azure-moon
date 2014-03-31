@@ -46,27 +46,23 @@ class Product(models.Model):
     pub_date = models.DateTimeField('date published')
     on_sale = models.BooleanField(default=False)
 
-    # Display name in manager application
-    def __unicode__(self):
-        return self.collection + ' --- ' + self.heading
-
     # Return JSON object of all products in the database
     def products_serialized(self):
         json = {
             'product_id': self.product_id,
-            'heading': self.name,
+            'heading': self.heading,
             'subheading': self.subheading,
             'description': self.description,
             'images': {
-                'image_1': self.image_1,
-                'image_2': self.image_2,
-                'image_3': self.image_3
+                'image_1': str(self.image_1),
+                'image_2': str(self.image_2),
+                'image_3': str(self.image_3)
             },
-            'price': self.price,
+            'price': float(self.price),
             'quantity': self.quantity,
             'collection': self.collection,
             'category': self.category,
-            'pub_date': self.pub_date
+            'pub_date': str(self.pub_date)
         }
         return json
 
