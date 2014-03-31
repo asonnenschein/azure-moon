@@ -77,17 +77,9 @@ class Customer(models.Model):
     zipcode = models.IntegerField(default=0)
     email = models.EmailField(max_length=200)
 
-    def __init__(self):
-        self.product_id = 'azure0' + b2a_hex(urandom(10))
-        self.pub_date = timezone.now()
-
 class Billing(models.Model):
     billing_id = models.CharField(max_length=16, editable=False)
     num = models.CharField(max_length=200)
     make = models.CharField(max_length=200)
     sec_num = models.CharField(max_length=200)
     type = models.CharField(max_length=200)
-
-    def __init__(self):
-        self.product_id = 'azure0' + b2a_hex(urandom(10))
-        self.pub_date = timezone.now()
