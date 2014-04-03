@@ -30,11 +30,11 @@ class Product(models.Model):
     subheading = models.CharField(max_length=200)
     description = models.TextField()
     image_1 = models.ImageField(upload_to=media_path, height_field=None, 
-        width_field=None, max_length=500)
+        width_field=None, max_length=500, required=False)
     image_2 = models.ImageField(upload_to=media_path, height_field=None, 
-        width_field=None, max_length=500)
+        width_field=None, max_length=500, required=False)
     image_3 = models.ImageField(upload_to=media_path, height_field=None, 
-        width_field=None, max_length=500)
+        width_field=None, max_length=500, required=False)
     price = models.DecimalField(max_digits=5, decimal_places=2, 
         help_text='Please use this format: 12.34')
     quantity = models.IntegerField(
