@@ -35,6 +35,8 @@ class Product(models.Model):
         width_field=None, max_length=500, required=False)
     image_3 = models.ImageField(upload_to=media_path, height_field=None, 
         width_field=None, max_length=500, required=False)
+    image_thumbnail = models.ImageField(upload_to=media_path, height_field=None, 
+        width_field=None, max_length=500, required=False)
     price = models.DecimalField(max_digits=5, decimal_places=2, 
         help_text='Please use this format: 12.34')
     quantity = models.IntegerField(
