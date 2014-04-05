@@ -8,9 +8,6 @@ from django.utils import timezone
 #def content_file_name(instance, filename):
 #    return '/'.join(['content', instance.user.username, filename])
 
-project_root = '/Users/adrian/Documents/venv/azure_moon/azuremoon/'
-media_path = project_root + 'azure_site/media'
-
 def build_uid(this_class):
     if this_class is 'customer':
         return unicode('ac' + b2a_hex(urandom(5)))
@@ -22,31 +19,46 @@ def build_uid(this_class):
 class Product(models.Model):
     '''
     Defines what constitutes a product, make sure to include a quantity*price 
-    height_fieldin the UI.
+    field in the UI.
     '''
+
+    # Individual product info
     product_id = models.CharField(max_length=20, editable=False, 
         default=build_uid('product'))
     heading = models.CharField(max_length=200)
     subheading = models.CharField(max_length=200)
     description = models.TextField()
-    image_1 = models.ImageField(upload_to=media_path, height_field=None, 
-        width_field=None, max_length=500, blank=True)
-    image_2 = models.ImageField(upload_to=media_path, height_field=None, 
-        width_field=None, max_length=500, blank=True)
-    image_3 = models.ImageField(upload_to=media_path, height_field=None, 
-        width_field=None, max_length=500, blank=True)
-    image_thumbnail = models.ImageField(upload_to=media_path, height_field=None, 
-        width_field=None, max_length=500, blank=True)
     price = models.DecimalField(max_digits=5, decimal_places=2, 
         help_text='Please use this format: 12.34')
     quantity = models.IntegerField(
         help_text='Total number of units available for sale')
+    pub_date = models.DateTimeField('date published')
+    on_sale = models.BooleanField(default=False)
+
+    # Group product info
     collection = models.CharField(max_length=200, 
         help_text='Group that this product belongs to (ex: Summer Scents)')
     category = models.CharField(max_length=200, 
         help_text='Type of product (ex: Necklaces)')
-    pub_date = models.DateTimeField('date published')
-    on_sale = models.BooleanField(default=False)
+
+    # Shipping info
+    usps_fast_shipping = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34')
+    usps_average_shipping = models.DecimalField(max_digits=5, decimal_places=2)
+    usps_regular_shipping = models.DecimalField(max_digits=5, decimal_places=2)
+    other_fast_shipping = models.DecimalField(max_digits=5, decimal_places=2)
+    other_average_shipping = models.DecimalField(max_digits=5, decimal_places=2)
+    other_regular_shipping = models.DecimalField(max_digits=5, decimal_places=2)
+
+    # Product images
+    image_1 = models.ImageField(upload_to=MEDIA_ROOT, height_field=None, 
+        width_field=None, max_length=500, blank=True)
+    image_2 = models.ImageField(upload_to=MEDIA_ROOT, height_field=None, 
+        width_field=None, max_length=500, blank=True)
+    image_3 = models.ImageField(upload_to=MEDIA_ROOT, height_field=None, 
+        width_field=None, max_length=500, blank=True)
+    image_thumbnail = models.ImageField(upload_to=MEDIA_ROOT, height_field=None, 
+        width_field=None, max_length=500, blank=True)
 
     # Return JSON object of all products in the database
     def products_serialized(self):
