@@ -1,5 +1,5 @@
 from django.contrib import admin
-from azure_site.models import Product, Customer, Billing
+from azuremoon.models import Product
 
 class ProductAdmin(admin.ModelAdmin):
 	fieldsets = [
@@ -9,10 +9,11 @@ class ProductAdmin(admin.ModelAdmin):
 			'usps_average_shipping', 'usps_regular_shipping']}),
 		('Other Shipping', {'fields': ['other_fast_shipping', 
 			'other_average_shipping', 'other_regular_shipping']}),
-		('Images', {'fields': ['image_1', 'image_2', 'image_3']})
+		('Images', {'fields': ['image_1', 'image_2', 'image_3',
+			'image_thumbnail']})
 	]
 	list_display = ('heading', 'collection', 'category', 'quantity')
 
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Customer)
-admin.site.register(Billing)
+#admin.site.register(Customer)
+#admin.site.register(Billing)

@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from os import urandom
 from binascii import b2a_hex
 from django.utils import timezone
@@ -51,14 +52,14 @@ class Product(models.Model):
     other_regular_shipping = models.DecimalField(max_digits=5, decimal_places=2)
 
     # Product images
-    image_1 = models.ImageField(upload_to=MEDIA_ROOT, height_field=None, 
-        width_field=None, max_length=500, blank=True)
-    image_2 = models.ImageField(upload_to=MEDIA_ROOT, height_field=None, 
-        width_field=None, max_length=500, blank=True)
-    image_3 = models.ImageField(upload_to=MEDIA_ROOT, height_field=None, 
-        width_field=None, max_length=500, blank=True)
-    image_thumbnail = models.ImageField(upload_to=MEDIA_ROOT, height_field=None, 
-        width_field=None, max_length=500, blank=True)
+    image_1 = models.ImageField(upload_to=settings.MEDIA_ROOT, 
+        height_field=None, width_field=None, max_length=500, blank=True)
+    image_2 = models.ImageField(upload_to=settings.MEDIA_ROOT, 
+        height_field=None, width_field=None, max_length=500, blank=True)
+    image_3 = models.ImageField(upload_to=settings.MEDIA_ROOT, 
+        height_field=None, width_field=None, max_length=500, blank=True)
+    image_thumbnail = models.ImageField(upload_to=settings.MEDIA_ROOT, 
+        height_field=None, width_field=None, max_length=500, blank=True)
 
     # Return JSON object of all products in the database
     def products_serialized(self):
@@ -79,7 +80,7 @@ class Product(models.Model):
             'pub_date': str(self.pub_date)
         }
         return json
-
+'''
 class Customer(models.Model):
     customer_id = models.CharField(max_length=16, editable=False)
     first_name = models.CharField(max_length=200)
@@ -90,10 +91,11 @@ class Customer(models.Model):
     state = models.CharField(max_length=200)
     zipcode = models.IntegerField(default=0)
     email = models.EmailField(max_length=200)
+    registered_user = models.BooleanField(default=False, editable=False)
 
 class Billing(models.Model):
     billing_id = models.CharField(max_length=16, editable=False)
     num = models.CharField(max_length=200)
     make = models.CharField(max_length=200)
     sec_num = models.CharField(max_length=200)
-    type = models.CharField(max_length=200)
+'''

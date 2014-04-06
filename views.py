@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import RequestContext, loader
-from azure_site.models import Product
+from azuremoon.models import Product
 import json
 
 # Create your views here.
 
 def homepage(request):
-    return render(request, "azure_site/home.html", {})
+    return render(request, "azuremoon/home.html", {})
 
 def get_products_serialized(products):
     data = [p.products_serialized() for p in products]
