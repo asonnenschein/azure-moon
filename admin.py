@@ -7,8 +7,9 @@ class ProductAdmin(admin.ModelAdmin):
 			'quantity', 'collection', 'category', 'pub_date', 'on_sale']}),
 		('USPS Shipping', {'fields': ['usps_fast_shipping', 
 			'usps_average_shipping', 'usps_regular_shipping']}),
-		('Other Shipping', {'fields': ['other_fast_shipping', 
-			'other_average_shipping', 'other_regular_shipping']}),
+		('Other Shipping', {'fields': ['other_shipping_name', 
+			'other_fast_shipping', 'other_average_shipping', 
+			'other_regular_shipping']}),
 		('Images', {'fields': ['image_1', 'image_2', 'image_3',
 			'image_thumbnail']})
 	]

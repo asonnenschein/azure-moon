@@ -45,11 +45,18 @@ class Product(models.Model):
     # Shipping info
     usps_fast_shipping = models.DecimalField(max_digits=5, decimal_places=2, 
         help_text='Please use this format: 12.34')
-    usps_average_shipping = models.DecimalField(max_digits=5, decimal_places=2)
-    usps_regular_shipping = models.DecimalField(max_digits=5, decimal_places=2)
-    other_fast_shipping = models.DecimalField(max_digits=5, decimal_places=2)
-    other_average_shipping = models.DecimalField(max_digits=5, decimal_places=2)
-    other_regular_shipping = models.DecimalField(max_digits=5, decimal_places=2)
+    usps_average_shipping = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34')
+    usps_regular_shipping = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34')
+    other_shipping_name = models.CharField(max_length=200, 
+        help_text='Name of shipping company (ex: FedEx)')
+    other_fast_shipping = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34')
+    other_average_shipping = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34')
+    other_regular_shipping = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34')
 
     # Product images
     image_1 = models.ImageField(upload_to=settings.MEDIA_ROOT, 
