@@ -4,11 +4,6 @@ from os import urandom
 from binascii import b2a_hex
 from django.utils import timezone
 
-# Create your models here.
-
-#def content_file_name(instance, filename):
-#    return '/'.join(['content', instance.user.username, filename])
-
 def build_uid(this_class):
     if this_class is 'customer':
         return unicode('ac' + b2a_hex(urandom(5)))
@@ -22,41 +17,24 @@ class Product(models.Model):
     Defines what constitutes a product, make sure to include a quantity*price 
     field in the UI.
     '''
-
     # Individual product info
     product_id = models.CharField(max_length=20, editable=False, 
         default=build_uid('product'))
-    heading = models.CharField(max_length=200)
-    subheading = models.CharField(max_length=200)
-    description = models.TextField()
+    heading = models.CharField(max_length=200, blank=True)
+    subheading = models.CharField(max_length=200, blank=True)
+    description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text='Please use this format: 12.34')
+        help_text='Please use this format: 12.34', blank=True)
     quantity = models.IntegerField(
-        help_text='Total number of units available for sale')
-    pub_date = models.DateTimeField('date published')
-    on_sale = models.BooleanField(default=False)
+        help_text='Total number of units available for sale', blank=True)
+    pub_date = models.DateTimeField('date published', blank=True)
+    on_sale = models.BooleanField(default=False, blank=True)
 
     # Group product info
-    collection = models.CharField(max_length=200, 
+    collection = models.CharField(max_length=200, blank=True,
         help_text='Group that this product belongs to (ex: Summer Scents)')
-    category = models.CharField(max_length=200, 
+    category = models.CharField(max_length=200, blank=True, 
         help_text='Type of product (ex: Necklaces)')
-
-    # Shipping info
-    usps_fast_shipping = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text='Please use this format: 12.34')
-    usps_average_shipping = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text='Please use this format: 12.34')
-    usps_regular_shipping = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text='Please use this format: 12.34')
-    other_shipping_name = models.CharField(max_length=200, 
-        help_text='Name of shipping company (ex: FedEx)')
-    other_fast_shipping = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text='Please use this format: 12.34')
-    other_average_shipping = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text='Please use this format: 12.34')
-    other_regular_shipping = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text='Please use this format: 12.34')
 
     # Product images
     image_1 = models.ImageField(upload_to=settings.MEDIA_ROOT, 
@@ -87,6 +65,31 @@ class Product(models.Model):
             'pub_date': str(self.pub_date)
         }
         return json
+
+class Shipping(models.Model):
+    '''
+    Flat cost of shipping to various destinations.  Foreign relationship
+    to Products model.
+    '''
+    product = models.ForeignKey(Product)
+    united_states = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34', blank=True)
+    australia = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34', blank=True)
+    international = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34', blank=True)
+
+
+class ProductVariations(models.Model):
+    '''
+    Products can have different types, like blue or green.  Foreign 
+    relationship to Products model.  Make this a tabular inline form.
+    '''
+    product = models.ForeignKey(Product)
+    variation = models.CharField(max_length=200, blank=True)
+    price = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34', blank=True)
+
 '''
 class Customer(models.Model):
     customer_id = models.CharField(max_length=16, editable=False)
