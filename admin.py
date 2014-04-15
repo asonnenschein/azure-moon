@@ -1,18 +1,20 @@
 from django.contrib import admin
-from azuremoon.models import Product
+from azuremoon.models import Product, Variation
+
+class VariationInline(admin.TabularInline):
+	model = Variation
+	extra = 1
 
 class ProductAdmin(admin.ModelAdmin):
 	fieldsets = [
 		(None, {'fields': ['heading', 'subheading', 'description', 'price', 
 			'quantity', 'collection', 'category', 'pub_date', 'on_sale']}),
-		('USPS Shipping', {'fields': ['usps_fast_shipping', 
-			'usps_average_shipping', 'usps_regular_shipping']}),
-		('Other Shipping', {'fields': ['other_shipping_name', 
-			'other_fast_shipping', 'other_average_shipping', 
-			'other_regular_shipping']}),
+		('Shipping', {'fields': ['united_states', 'australia', 
+			'international']}),
 		('Images', {'fields': ['image_1', 'image_2', 'image_3',
 			'image_thumbnail']})
 	]
+	inlines = [VariationInline]
 	list_display = ('heading', 'collection', 'category', 'quantity')
 
 admin.site.register(Product, ProductAdmin)

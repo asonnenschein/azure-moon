@@ -36,6 +36,14 @@ class Product(models.Model):
     category = models.CharField(max_length=200, blank=True, 
         help_text='Type of product (ex: Necklaces)')
 
+    # Shipping Info
+    united_states = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34', blank=True)
+    australia = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34', blank=True)
+    international = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34', blank=True)
+
     # Product images
     image_1 = models.ImageField(upload_to=settings.MEDIA_ROOT, 
         height_field=None, width_field=None, max_length=500, blank=True)
@@ -62,25 +70,12 @@ class Product(models.Model):
             'quantity': self.quantity,
             'collection': self.collection,
             'category': self.category,
-            'pub_date': str(self.pub_date)
+            'pub_date': str(self.pub_date),
+            'variations': str(Variation.objects.get(variation='something'))
         }
         return json
 
-class Shipping(models.Model):
-    '''
-    Flat cost of shipping to various destinations.  Foreign relationship
-    to Products model.
-    '''
-    product = models.ForeignKey(Product)
-    united_states = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text='Please use this format: 12.34', blank=True)
-    australia = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text='Please use this format: 12.34', blank=True)
-    international = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text='Please use this format: 12.34', blank=True)
-
-
-class ProductVariations(models.Model):
+class Variation(models.Model):
     '''
     Products can have different types, like blue or green.  Foreign 
     relationship to Products model.  Make this a tabular inline form.
