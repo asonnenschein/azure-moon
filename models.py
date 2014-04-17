@@ -36,14 +36,6 @@ class Product(models.Model):
     category = models.CharField(max_length=200, blank=True, 
         help_text='Type of product (ex: Necklaces)')
 
-    # Shipping Info
-    united_states = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text='Please use this format: 12.34', blank=True)
-    australia = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text='Please use this format: 12.34', blank=True)
-    international = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text='Please use this format: 12.34', blank=True)
-
     # Product images
     image_1 = models.ImageField(upload_to=settings.MEDIA_ROOT, 
         height_field=None, width_field=None, max_length=500, blank=True)
@@ -85,22 +77,11 @@ class Variation(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2, 
         help_text='Please use this format: 12.34', blank=True)
 
-'''
-class Customer(models.Model):
-    customer_id = models.CharField(max_length=16, editable=False)
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    street_address = models.CharField(max_length=200)
-    unit = models.CharField(max_length=200)
-    city = models.CharField(max_length=200)
-    state = models.CharField(max_length=200)
-    zipcode = models.IntegerField(default=0)
-    email = models.EmailField(max_length=200)
-    registered_user = models.BooleanField(default=False, editable=False)
-
-class Billing(models.Model):
-    billing_id = models.CharField(max_length=16, editable=False)
-    num = models.CharField(max_length=200)
-    make = models.CharField(max_length=200)
-    sec_num = models.CharField(max_length=200)
-'''
+class Shipping(models.Model):
+    '''
+    Flat shipping rates for different locations.
+    '''
+    # Shipping Info
+    place = models.CharField(max_length=200, blank=True)
+    price = models.DecimalField(max_digits=5, decimal_places=2, 
+        help_text='Please use this format: 12.34', blank=True)
