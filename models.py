@@ -48,6 +48,20 @@ class Product(models.Model):
 
     # Return JSON object of all products in the database
     def products_serialized(self):
+        def get_variations(id):
+            try:
+                product_variations = []
+                variations = Variation.objects.filter(product_id=id)
+                for v in variations:
+                    select = {
+                        'variation': v.variation,
+                        'price': float(v.price)
+                    }
+                    product_variations.append(select)
+                return product_variations
+            except:
+                return "Undefined"
+
         json = {
             'product_id': self.product_id,
             'heading': self.heading,
@@ -63,7 +77,7 @@ class Product(models.Model):
             'collection': self.collection,
             'category': self.category,
             'pub_date': str(self.pub_date),
-            'variations': str(Variation.objects.get(variation='something'))
+            'variations': get_variations(self.pk)
         }
         return json
 
