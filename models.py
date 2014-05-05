@@ -46,22 +46,22 @@ class Product(models.Model):
     image_thumbnail = models.ImageField(upload_to=settings.MEDIA_ROOT, 
         height_field=None, width_field=None, max_length=500, blank=True)
 
+    def get_variations(self, id):
+        try:
+            product_variations = []
+            variations = Variation.objects.filter(product_id=id)
+            for v in variations:
+                select = {
+                    'variation': v.variation,
+                    'price': float(v.price)
+                }
+                product_variations.append(select)
+            return product_variations
+        except:
+            return "Undefined"
+
     # Return JSON object of all products in the database
     def products_serialized(self):
-        def get_variations(id):
-            try:
-                product_variations = []
-                variations = Variation.objects.filter(product_id=id)
-                for v in variations:
-                    select = {
-                        'variation': v.variation,
-                        'price': float(v.price)
-                    }
-                    product_variations.append(select)
-                return product_variations
-            except:
-                return "Undefined"
-
         json = {
             'product_id': self.product_id,
             'heading': self.heading,
@@ -77,9 +77,39 @@ class Product(models.Model):
             'collection': self.collection,
             'category': self.category,
             'pub_date': str(self.pub_date),
-            'variations': get_variations(self.pk)
+            'variations': self.get_variations(self.pk)
         }
         return json
+
+    def filter_collection(self, collection_name):
+        if self.collection is None:
+            return Product.objects.none()
+        return Product.objects.filter(collection=collection_name)
+
+    def collection_serialized(self, collection_name):
+        matched_collections = []
+        collect = self.filter_collection(collection_name)
+        for c in collect:
+            json = {
+                'product_id': c.product_id,
+                'heading': c.heading,
+                'subheading': c.subheading,
+                'description': c.description,
+                'images': {
+                    'image_1': str(c.image_1),
+                    'image_2': str(c.image_2),
+                    'image_3': str(c.image_3)
+                },
+                'price': float(c.price),
+                'quantity': c.quantity,
+                'collection': c.collection,
+                'category': c.category,
+                'pub_date': str(c.pub_date),
+                'variations': c.get_variations(c.pk)
+            }
+            matched_collections.append(json)
+        return matched_collections
+
 
 class Variation(models.Model):
     '''

@@ -11,7 +11,7 @@ def homepage(request):
 
 def get_products_serialized(products):
     data = [p.products_serialized() for p in products]
-    return HttpResponse(json.dumps(data), mimetype='application/json')
+    return HttpResponse(json.dumps(data), content_type='application/json')
 
 def view_all_products(products):
     return get_products_serialized(products)
@@ -19,3 +19,9 @@ def view_all_products(products):
 def get_all_products(extension='json'):
     models = Product.objects.all()
     return view_all_products(models)
+
+def get_collection(request):
+	collection_name = request.GET.get('name')
+	p = Product()
+	data = p.collection_serialized(collection_name)
+	return HttpResponse(json.dumps(data), content_type='application/json')
