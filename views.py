@@ -31,3 +31,15 @@ def get_category(request):
     p = Product()
     data = p.category_serialized(category_name)
     return HttpResponse(json.dumps(data), content_type='application/json')
+
+def get_values_for_field(request):
+    field_name = request.GET.get('field')
+    p = Product()
+    data = p.get_values_for_field(field_name)
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+def get_single_product(request):
+    product_id = request.GET.get('product_id')
+    p = Product()
+    data = p.get_single_product(product_id)
+    return HttpResponse(json.dumps(data), content_type='application/json')

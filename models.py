@@ -46,50 +46,28 @@ class Product(models.Model):
     image_thumbnail = models.ImageField(upload_to=settings.MEDIA_ROOT, 
         height_field=None, width_field=None, max_length=500, blank=True)
 
-    def get_variations(self, id):
-        try:
-            product_variations = []
-            variations = Variation.objects.filter(product_id=id)
-            for v in variations:
-                select = {
-                    'variation': v.variation,
-                    'price': float(v.price)
-                }
-                product_variations.append(select)
-            return product_variations
-        except:
-            return "Undefined"
-
     # Return JSON object of all products in the database
-    def products_serialized(self):
+    def products_serialized(self, model=None):
+        if model is None:
+            model = self
         json = {
-            'product_id': self.product_id,
-            'heading': self.heading,
-            'subheading': self.subheading,
-            'description': self.description,
+            'product_id': model.product_id,
+            'heading': model.heading,
+            'subheading': model.subheading,
+            'description': model.description,
             'images': {
-                'image_1': str(self.image_1),
-                'image_2': str(self.image_2),
-                'image_3': str(self.image_3)
+                'image_1': str(model.image_1),
+                'image_2': str(model.image_2),
+                'image_3': str(model.image_3)
             },
-            'price': float(self.price),
-            'quantity': self.quantity,
-            'collection': self.collection,
-            'category': self.category,
-            'pub_date': str(self.pub_date),
-            'variations': self.get_variations(self.pk)
+            'price': float(model.price),
+            'quantity': model.quantity,
+            'collection': model.collection,
+            'category': model.category,
+            'pub_date': str(model.pub_date),
+            'variations': model.get_variations(model.pk)
         }
         return json
-
-    def filter_collection(self, collection_name):
-        if self.collection is None:
-            return Product.objects.none()
-        return Product.objects.filter(collection=collection_name)
-
-    def filter_category(self, category_name):
-        if self.category is None:
-            return Product.objects.none()
-        return Product.objects.filter(category=category_name)
 
     def selection_serialized(self, function, query):
         matched_resources = []
@@ -115,6 +93,30 @@ class Product(models.Model):
             matched_resources.append(json)
         return matched_resources
 
+    def get_variations(self, id):
+        try:
+            product_variations = []
+            variations = Variation.objects.filter(product_id=id)
+            for v in variations:
+                select = {
+                    'variation': v.variation,
+                    'price': float(v.price)
+                }
+                product_variations.append(select)
+            return product_variations
+        except:
+            return "Undefined"
+
+    def filter_collection(self, collection_name):
+        if self.collection is None:
+            return Product.objects.none()
+        return Product.objects.filter(collection=collection_name)
+
+    def filter_category(self, category_name):
+        if self.category is None:
+            return Product.objects.none()
+        return Product.objects.filter(category=category_name)
+
     def collection_serialized(self, query):
         do_filter = self.filter_collection
         return self.selection_serialized(do_filter, query)
@@ -123,6 +125,13 @@ class Product(models.Model):
         do_filter = self.filter_category
         return self.selection_serialized(do_filter, query)
 
+    def get_values_for_field(self, field):
+        values = Product.objects.values_list(field, flat=True).distinct()
+        return [str(value) for value in values]
+
+    def get_single_product(self, product_id):
+        product = Product.objects.filter(product_id=product_id)[0]
+        return self.products_serialized(product)
 
 class Variation(models.Model):
     '''
