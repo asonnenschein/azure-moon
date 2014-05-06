@@ -86,29 +86,42 @@ class Product(models.Model):
             return Product.objects.none()
         return Product.objects.filter(collection=collection_name)
 
-    def collection_serialized(self, collection_name):
-        matched_collections = []
-        collect = self.filter_collection(collection_name)
-        for c in collect:
+    def filter_category(self, category_name):
+        if self.category is None:
+            return Product.objects.none()
+        return Product.objects.filter(category=category_name)
+
+    def selection_serialized(self, function, query):
+        matched_resources = []
+        matches = function(query)
+        for match in matches:
             json = {
-                'product_id': c.product_id,
-                'heading': c.heading,
-                'subheading': c.subheading,
-                'description': c.description,
+                'product_id': match.product_id,
+                'heading': match.heading,
+                'subheading': match.subheading,
+                'description': match.description,
                 'images': {
-                    'image_1': str(c.image_1),
-                    'image_2': str(c.image_2),
-                    'image_3': str(c.image_3)
+                    'image_1': str(match.image_1),
+                    'image_2': str(match.image_2),
+                    'image_3': str(match.image_3)
                 },
-                'price': float(c.price),
-                'quantity': c.quantity,
-                'collection': c.collection,
-                'category': c.category,
-                'pub_date': str(c.pub_date),
-                'variations': c.get_variations(c.pk)
+                'price': float(match.price),
+                'quantity': match.quantity,
+                'collection': match.collection,
+                'category': match.category,
+                'pub_date': str(match.pub_date),
+                'variations': match.get_variations(match.pk)
             }
-            matched_collections.append(json)
-        return matched_collections
+            matched_resources.append(json)
+        return matched_resources
+
+    def collection_serialized(self, query):
+        do_filter = self.filter_collection
+        return self.selection_serialized(do_filter, query)
+
+    def category_serialized(self, query):
+        do_filter = self.filter_category
+        return self.selection_serialized(do_filter, query)
 
 
 class Variation(models.Model):

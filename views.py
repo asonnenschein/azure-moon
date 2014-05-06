@@ -25,3 +25,9 @@ def get_collection(request):
 	p = Product()
 	data = p.collection_serialized(collection_name)
 	return HttpResponse(json.dumps(data), content_type='application/json')
+
+def get_category(request):
+    category_name = request.GET.get('name')
+    p = Product()
+    data = p.category_serialized(category_name)
+    return HttpResponse(json.dumps(data), content_type='application/json')
