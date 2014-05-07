@@ -33,7 +33,7 @@ class Product(models.Model):
     # Group product info
     collection = models.CharField(max_length=200, blank=True,
         help_text='Group that this product belongs to (ex: Summer Scents)')
-    category = models.CharField(max_length=200, blank=True, 
+    2, blank=True, 
         help_text='Type of product (ex: Necklaces)')
 
     # Product images
