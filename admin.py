@@ -1,5 +1,5 @@
 from django.contrib import admin
-from azuremoon.models import Product, Variation, Shipping
+from azuremoon.models import Product, Variation, Shipping, UserProfile
 
 class VariationInline(admin.TabularInline):
 	model = Variation
@@ -23,4 +23,5 @@ class ShippingAdmin(admin.ModelAdmin):
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Shipping, ShippingAdmin)
+admin.site.register(UserProfile)
 #admin.site.register(Billing)

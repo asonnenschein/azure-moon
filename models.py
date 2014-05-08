@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
 from os import urandom
@@ -33,7 +34,7 @@ class Product(models.Model):
     # Group product info
     collection = models.CharField(max_length=200, blank=True,
         help_text='Group that this product belongs to (ex: Summer Scents)')
-    2, blank=True, 
+    category = models.CharField(max_length=200, blank=True, 
         help_text='Type of product (ex: Necklaces)')
 
     # Product images
@@ -151,3 +152,9 @@ class Shipping(models.Model):
     place = models.CharField(max_length=200, blank=True)
     price = models.DecimalField(max_digits=5, decimal_places=2, 
         help_text='Please use this format: 12.34', blank=True)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+
+    def __unicode__(self):
+        return self.user.username
